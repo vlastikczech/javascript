@@ -330,3 +330,55 @@ function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
 
 var john  = new SmithPerson('John', 1990); // passed 2 arguments
 var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
+// ES6
+function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', 
+nationality = 'american'){
+    
+    this.firstName = firstName;
+    this.yearOfBirth = yearOfBirth;
+    this.lastName = lastName;
+    this.nationality = nationality;
+}
+var john  = new SmithPerson('John', 1990); // passed 2 arguments
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
+
+// Lecture: Maps
+
+const question = new Map();
+question.set('question', 'What is the official name of the latest major JavaScript version');
+// Define new key value pair
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'Correct answer :D' );
+question.set(false, 'Wrong, please try again!');
+
+// retrieve data
+console.log(question.get('question'));
+console.log(question.size);
+
+// remove data
+question.delete(4);
+
+if(question.has(4)) { //checks if 4 exists in data
+    console.log('Answer 4 is here');
+}
+// delete all data
+question.clear();
+// Maps are iterable
+question.forEach((value, key) => console.log(`This is ${key}, and it's set to ${value}`));
+
+for (let [key, value] of question.entries()) { // using entries returns all key, value pairs.  Works for arrays too
+    if(typeof(key) === 'number') {
+        console.log(`Answer ${key}: ${vlaue}`);
+    }
+}
+
+const ans = parseInt(prompt('Write the correct answer'));
+console.log(question.get(ans === question.get('correct')));
+// Use anything as keys, opens a lot of possibilities.
+// Maps are iterable allows u to manipulate the data
+// can easily add and remove data from a map
+// Map > objects when building hash maps
