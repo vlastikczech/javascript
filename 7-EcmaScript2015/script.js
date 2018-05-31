@@ -200,11 +200,133 @@ const [age2, retirement] = calcAgeRetirement(1990);
 const boxes = document.querySelectorAll('.box');
 
 // ES5
-// var boxesArr5 = Array.prototype.slice.call(boxes);
+ var boxesArr5 = Array.prototype.slice.call(boxes);
 // boxesArr5.forEach(function(current) {
 //     current.style.backgroundColor = 'dodgerblue';
 // })
 
 // ES6
-const boxesArr6 = Array.from(boxes);
-boxesArr6.forEach(current => current.style.backgroundColor = 'dodgerblue');
+const boxesArr6 = 
+Array.from(boxes).boxesArr6.forEach(current => current.style.backgroundColor = 'dodgerblue');
+
+//ES5
+for(var i = 0; i < boxesArr5.length; i++){
+    if(boxesArr5[i].className === 'box blue') {
+        continue;
+    }
+
+    boxesArr5[i].textContent = 'I changed to blue!';
+}
+
+//ES6 For-Off loop
+for (const current of boxesArr6) {
+    if (current.className.includes('blue')) {
+        continue;
+    }
+    current.textContent = 'I changed to blue!';
+}
+
+
+//ES5
+var ages = [12, 17, 8, 21, 14, 11];
+
+var full = ages.map(function(cur) {
+    return cur >= 18;
+});
+console.log(full);
+
+console.log(full.indexOf(true));
+console.log(ages[full.indexOf(true)]);
+
+//ES6
+
+console.log(ages.findIndex(cur => cur >= 18));
+console.log(ages.find(cur => cur >= 18));
+
+// Lecture: Spread operator
+
+function addFourAges (a, b, c, d) {
+    return a + b + c + d;
+}
+
+var sum1 = addFourAges(18, 30, 12, 21);
+console.log(sum1);
+
+//ES5
+var ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages); //apply will take the array and call the array
+console.log(sum2);
+
+//ES6
+const sum3 = addFourAges(...ages); // expands the array into it's components
+console.log(sum3);
+
+const familySmith = ['John', 'Jane', 'Mark'];
+const familyMiller = ['Mary', 'Bob', 'Anm'];
+const bigFamily = [...familySmith, ...familyMiller];
+console.log(bigFamily);
+
+
+const h = document.querySelector('h1');
+const boxes = document.querySelectorAll('.box'); // node list
+const all = [h, ...boxes];
+
+Array.from(all).forEach(cur => cur.style.color = 'purple');
+
+// Lecture: Rest parameters
+
+// //ES5
+// function isFullAge5() {
+//     // console.log(arguments);
+//     var argsArr = Array.prototype.slice.call(arguments);
+//     args.Arr(forEach(function(cur) {
+//         console.log((2018 - cur) >= 18);
+//     }))
+// }
+
+// isFullAge5(1990, 1999, 1965);
+
+// //ES6
+// function isFullAge6(...years) {
+//     years.forEach(cur => console.log((2018 - cur) >= 18));
+// } //passes the array from the function and allows you to access the years
+// // from each index
+// isFullAge6(1990, 1999, 1965));
+
+
+//ES5
+function isFullAge5(limit) {
+    // console.log(arguments);
+    var argsArr = Array.prototype.slice.call(arguments, 1);
+    args.Arr.forEach(function(cur) {
+        console.log((2018 - cur) >= limit);
+    })
+}
+
+isFullAge5(1990, 1999, 1965);
+
+//ES6
+function isFullAge6(limit, ...years) {
+    years.forEach(cur => console.log((2018 - cur) >= limit));
+} //passes the array from the function and allows you to access the years
+// from each index
+isFullAge6(16, 1990, 1999, 1965);
+
+// Lecutre: Default parameters
+
+//ES5
+
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+
+    lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+    nationality === undefined ? nationality = 'American' : nationality = nationality;
+    // default paraments above
+
+    this.firstName = firstName;
+    this.yearOfBirth = yearOfBirth;
+    this.lastName = lastName;
+    this.nationality = nationality;
+}
+
+var john  = new SmithPerson('John', 1990); // passed 2 arguments
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
