@@ -77,20 +77,33 @@
         // });
         
         //Async/Wait
-        async function gettRecipesAW() { // means Asynchonus function
-            const IDs = await getIDs; // await stops the code from excuting until the promise is resolved
-            console.log(IDs);
-            const recipe = await getRecipe(IDs[2]);
-            console.log(recipe);
-            const related = await getRelated('Jonas');
-            console.log(related);
+        // async function gettRecipesAW() { // means Asynchonus function
+        //     const IDs = await getIDs; // await stops the code from excuting until the promise is resolved
+        //     console.log(IDs);
+        //     const recipe = await getRecipe(IDs[2]);
+        //     console.log(recipe);
+        //     const related = await getRelated('Jonas');
+        //     console.log(related);
 
-            return recipe;
-        }
-        const rec = getRecipedAW().then(result => console.log(`${result} is the best ever!`);
-        //.then consumes the promise
-        // allows us to consume all the promises without a lot of callbacks. Can only be used inside an async function
-        // async runs in the background
+        //     return recipe;
+        // }
+        // const rec = getRecipedAW().then(result => console.log(`${result} is the best ever!`);
+        // //.then consumes the promise
+        // // allows us to consume all the promises without a lot of callbacks. Can only be used inside an async function
+        // // async runs in the background
+        fetch('https://crossorigin.me/https://www.metaweather.com/api/location/2487956/')
+        .then(result => {
+            console.log(result);
+            return result.json();
+        })
+        .then(data => {
+           // console.log(data);
+           const today = data.consolidated_weather[0]
+           console.log(`Tempartures in ${data.title} stay between ${today.min_temp} and
+           ${today.max_teno}.`)
+
+        })
+        .catch(error => console.log(error));
     </script>
 </body>
 </html>
